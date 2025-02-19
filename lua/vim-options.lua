@@ -10,14 +10,25 @@ vim.g.mapleader = " "
 vim.api.nvim_set_keymap("n", "<C-D>", "<C-D>zz", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-U>", "<C-U>zz", { noremap = true, silent = true })
 
--- Copy to clipboard
-vim.api.nvim_set_keymap("v", "<leader>y", '"+y', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>Y", '"+yg_', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>y", '"+y', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>yy", '"+yy', { noremap = true, silent = true })
+vim.g.clipboard = {
+	name = "clip.exe",
+	copy = {
+		["+"] = "clip.exe",
+	},
+	paste = {
+		["+"] = "powershell.exe -command Get-Clipboard",
+	},
+	cache_enabled = true,
+}
 
--- Paste from clipboard
-vim.api.nvim_set_keymap("n", "<leader>p", '"+p', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>P", '"+P', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<leader>p", '"+p', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<leader>P", '"+P', { noremap = true, silent = true })
+-- -- Copy to clipboard
+vim.api.nvim_set_keymap("v", "<leader>y", '"+y', { noremap = true, silent = true, desc = "Copy to clipboard" })
+vim.api.nvim_set_keymap("n", "<leader>Y", '"+yg_', { noremap = true, silent = true, desc = "Copy to clipboard" })
+vim.api.nvim_set_keymap("n", "<leader>y", '"+y', { noremap = true, silent = true, desc = "Copy to clipboard" })
+vim.api.nvim_set_keymap("n", "<leader>yy", '"+yy', { noremap = true, silent = true, desc = "Copy to clipboard" })
+
+-- -- Paste from clipboard
+vim.api.nvim_set_keymap("n", "<leader>p", '"+p', { noremap = true, silent = true, desc = "Past from clipboard" })
+vim.api.nvim_set_keymap("n", "<leader>P", '"+P', { noremap = true, silent = true, desc = "Past from clipboard" })
+vim.api.nvim_set_keymap("v", "<leader>p", '"+p', { noremap = true, silent = true, desc = "Past from clipboard" })
+vim.api.nvim_set_keymap("v", "<leader>P", '"+P', { noremap = true, silent = true, desc = "Past from clipboard" })
