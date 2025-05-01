@@ -6,6 +6,7 @@ vim.cmd("set nu rnu")
 vim.cmd("set ignorecase")
 vim.cmd("set smartcase")
 vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
 
 vim.api.nvim_set_keymap("n", "<C-D>", "<C-D>zz", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-U>", "<C-U>zz", { noremap = true, silent = true })
