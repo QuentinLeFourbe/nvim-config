@@ -15,6 +15,7 @@ return {
 				"dockerls",
 				"cssls",
 				"jdtls",
+				"vue_ls",
 			},
 		},
 		dependencies = {
@@ -54,6 +55,8 @@ return {
 			require("typescript-tools").setup({
 				capabilities = capabilities,
 			})
+
+      require("config.vue")
 		end,
 		keys = {
 			{
