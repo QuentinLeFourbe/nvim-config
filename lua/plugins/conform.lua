@@ -24,7 +24,6 @@ return {
 				typescriptreact = { "prettierd" },
 				javascriptreact = { "prettierd" },
 				xml = { "xmlformatter" },
-				yaml = { "yamlfmt" },
 				["*"] = { "prettierd" },
 			},
 

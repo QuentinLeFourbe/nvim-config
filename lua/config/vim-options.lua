@@ -8,19 +8,24 @@ vim.cmd("set smartcase")
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+vim.diagnostic.enable = true
+vim.diagnostic.config({
+	virtual_lines = true,
+})
+
 vim.api.nvim_set_keymap("n", "<C-D>", "<C-D>zz", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-U>", "<C-U>zz", { noremap = true, silent = true })
 
-vim.g.clipboard = {
-	name = "clip.exe",
-	copy = {
-		["+"] = "clip.exe",
-	},
-	paste = {
-		["+"] = "powershell.exe -command Get-Clipboard",
-	},
-	cache_enabled = true,
-}
+-- vim.g.clipboard = {
+-- 	name = "clip.exe",
+-- 	copy = {
+-- 		["+"] = "clip.exe",
+-- 	},
+-- 	paste = {
+-- 		["+"] = "powershell.exe -command Get-Clipboard",
+-- 	},
+-- 	cache_enabled = true,
+-- }
 
 -- -- Copy to clipboard
 vim.api.nvim_set_keymap("v", "<leader>y", '"+y', { noremap = true, silent = true, desc = "Copy to clipboard" })
