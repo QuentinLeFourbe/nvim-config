@@ -14,8 +14,8 @@ return {
 				"remark_ls",
 				"dockerls",
 				"cssls",
-				"jdtls",
 				"vue_ls",
+				"vtsls",
 			},
 		},
 		dependencies = {
@@ -28,35 +28,39 @@ return {
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			require("java").setup()
-			local lspConfig = require("lspconfig")
-			lspConfig.jdtls.setup({ capabilities = capabilities })
-			lspConfig.lua_ls.setup({ capabilities = capabilities })
-			lspConfig.html.setup({ capabilities = capabilities })
-			lspConfig.graphql.setup({ capabilities = capabilities })
-			lspConfig.jsonls.setup({ capabilities = capabilities })
-			lspConfig.remark_ls.setup({ capabilities = capabilities })
-			lspConfig.dockerls.setup({ capabilities = capabilities })
-			lspConfig.cssls.setup({ capabilities = capabilities })
-			lspConfig.eslint.setup({
-				capabilities = capabilities,
-				on_attach = function(_, bufnr)
+			vim.lsp.config("jdtls", { capabilities = capabilities })
+			vim.lsp.config("lua_ls", { capabilities = capabilities })
+			vim.lsp.config("html", { capabilities = capabilities })
+			vim.lsp.config("graphql", { capabilities = capabilities })
+			vim.lsp.config("jsonls", { capabilities = capabilities })
+			vim.lsp.config("remark_ls", { capabilities = capabilities })
+			vim.lsp.config("dockerls", { capabilities = capabilities })
+			vim.lsp.config("cssls", { capabilities = capabilities })
+
+			local base_on_attach = vim.lsp.config.eslint.on_attach
+			vim.lsp.config("eslint", {
+				on_attach = function(client, bufnr)
+					if not base_on_attach then
+						return
+					end
+
+					base_on_attach(client, bufnr)
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						buffer = bufnr,
-						command = "EslintFixAll",
+						command = "LspEslintFixAll",
 					})
 				end,
 			})
-			lspConfig.denols.setup({
+
+			vim.lsp.config("yamlls", {
 				capabilities = capabilities,
-				root_dir = lspConfig.util.root_pattern("deno.json", "deno.jsonc"),
 			})
-			lspConfig.yamlls.setup({ capabilities = capabilities })
 
 			require("typescript-tools").setup({
 				capabilities = capabilities,
 			})
 
-      require("config.vue")
+			require("config.vue")
 		end,
 		keys = {
 			{

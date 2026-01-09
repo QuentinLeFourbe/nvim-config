@@ -7,6 +7,7 @@ return {
 		linters_by_ft = {
 			typescript = { "eslint_d" },
 			javascript = { "eslint_d" },
+			["*"] = { "eslint_d" },
 			-- Use the "*" filetype to run linters on all filetypes.
 			-- ['*'] = { 'global linter' },
 
