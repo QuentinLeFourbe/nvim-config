@@ -16,6 +16,7 @@ return {
 				"cssls",
 				"vue_ls",
 				"vtsls",
+				"eslint",
 			},
 		},
 		dependencies = {
@@ -62,6 +63,7 @@ return {
 			})
 
 			require("config.vue")
+			vim.lsp.enable({ "vtsls", "vue_ls", "eslint" })
 		end,
 		keys = {
 			{
