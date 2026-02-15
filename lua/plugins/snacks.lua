@@ -24,7 +24,21 @@ return {
 					hidden = true,
 				},
 				explorer = {
+					layout = { layout = { position = "left", width = 40 } },
 					actions = {
+						cycle_width = function(picker)
+							local widths = { 30, 40, 50, 60 }
+							local current = vim.api.nvim_win_get_width(picker.input.win.win)
+							local next_width = widths[1]
+							for i, w in ipairs(widths) do
+								if current >= w - 1 and current <= w + 1 then
+									next_width = widths[(i % #widths) + 1]
+									break
+								end
+							end
+							vim.api.nvim_win_set_width(picker.input.win.win, next_width)
+							picker.opts.layout.layout.width = next_width
+						end,
 						explorer_paste = function(picker, item) --[[Override]]
 							local Tree = require("snacks.explorer.tree")
 							local files = vim.split(vim.fn.getreg(vim.v.register or "+") or "", "\n", { plain = true })
@@ -62,6 +76,13 @@ return {
 							Tree:open(dir)
 							picker:update({ target = dir })
 						end,
+					},
+					win = {
+						list = {
+							keys = {
+								["<A-w>"] = "cycle_width",
+							},
+						},
 					},
 				},
 			},
@@ -602,9 +623,6 @@ return {
 					.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 })
 					:map("<leader>uc")
 				Snacks.toggle.treesitter():map("<leader>uT")
-				Snacks.toggle
-					.option("background", { off = "light", on = "dark", name = "Dark Background" })
-					:map("<leader>ub")
 				Snacks.toggle.inlay_hints():map("<leader>uh")
 				Snacks.toggle.indent():map("<leader>ug")
 				Snacks.toggle.dim():map("<leader>uD")

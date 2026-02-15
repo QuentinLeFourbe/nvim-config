@@ -17,6 +17,13 @@ return {
       topdelete = { text = "" },
       changedelete = { text = "▎" },
     },
+    current_line_blame = true,
+    current_line_blame_opts = {
+      virt_text = true,
+      virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+      delay = 500,
+      ignore_whitespace = false,
+    },
     on_attach = function(buffer)
       local gs = package.loaded.gitsigns
 
@@ -52,6 +59,7 @@ return {
       map("n", "<leader>ghB", function() gs.blame() end, "Blame Buffer")
       map("n", "<leader>ghd", gs.diffthis, "Diff This")
       map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+      map("n", "<leader>ub", gs.toggle_current_line_blame, "Toggle Line Blame")
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
     end,
   },
