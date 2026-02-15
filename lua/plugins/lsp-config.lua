@@ -19,6 +19,7 @@ return {
 			},
 		},
 		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
 			{ "mason-org/mason.nvim", opts = {} },
 			"neovim/nvim-lspconfig",
 		},

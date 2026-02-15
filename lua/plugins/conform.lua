@@ -23,6 +23,7 @@ return {
 				typescript = { "prettierd" },
 				typescriptreact = { "prettierd" },
 				javascriptreact = { "prettierd" },
+				vue = { "prettierd" },
 				xml = { "xmlformatter" },
 				["*"] = { "prettierd" },
 			},
@@ -32,11 +33,19 @@ return {
 				lsp_format = "fallback",
 			},
 			-- Set up format-on-save
-			format_on_save = { timeout_ms = 500 },
+			format_on_save = {
+				timeout_ms = 1000,
+				lsp_format = "fallback",
+			},
 			-- Customize formatters
 			formatters = {
 				shfmt = {
 					prepend_args = { "-i", "2" },
+				},
+				prettierd = {
+					env = {
+						XDG_RUNTIME_DIR = vim.fn.expand("~/.cache"),
+					},
 				},
 			},
 		})

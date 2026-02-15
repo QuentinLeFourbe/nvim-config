@@ -4,7 +4,7 @@ return {
 	config = function()
 		require("lualine").setup({
 			options = {
-				theme = "catpuccin",
+				theme = "catppuccin",
 			},
 			sections = {
 				-- Add the macro recording status in the mode section

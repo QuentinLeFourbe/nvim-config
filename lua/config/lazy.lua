@@ -36,5 +36,3 @@ require("lazy").setup({
 
 	checker = { enabled = true },
 })
-
-require("lazy").setup({ { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" } })
